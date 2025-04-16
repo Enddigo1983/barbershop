@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="barbershop.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="1450"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="services" custom_title="0" dock_id="2" table="4,8:mainservices"/><table title="sqlite_sequence" custom_title="0" dock_id="1" table="4,15:mainsqlite_sequence"/><dock_state state="000000ff00000000fd0000000100000002000003bf000002aefc0100000001fc00000000000003bf0000012800fffffffa000000000100000002fb000000160064006f0063006b00420072006f00770073006500310100000000ffffffff0000012800fffffffb000000160064006f0063006b00420072006f00770073006500320100000000ffffffff0000012800ffffff000002680000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="masters" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="124"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="services" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="29"/><column index="2" value="124"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="sqlite_sequence" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="1" mode="1"/></sort><column_widths><column index="1" value="39"/><column index="2" value="29"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">-- Create the services table
+CREATE TABLE services (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+-- Create the masters table
+CREATE TABLE masters (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+-- Create the appointments table
+CREATE TABLE appointments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    service_id INTEGER,
+    master_id INTEGER,
+    FOREIGN KEY (service_id) REFERENCES services(id),
+    FOREIGN KEY (master_id) REFERENCES masters(id)
+);
+
+-- Insert sample data into the services table
+INSERT INTO services (name) VALUES ('Стрижка мужская');
+INSERT INTO services (name) VALUES ('Стрижка детская');
+INSERT INTO services (name) VALUES ('Бритье');
+INSERT INTO services (name) VALUES ('Укладка');
+INSERT INTO services (name) VALUES ('Окрашивание');
+
+-- Insert sample data into the masters table
+INSERT INTO masters (name) VALUES ('Иван Петров');
+INSERT INTO masters (name) VALUES ('Алексей Смирнов');
+INSERT INTO masters (name) VALUES ('Мария Иванова');
+INSERT INTO masters (name) VALUES ('Дмитрий Козлов');
+
+-- Insert sample data into the appointments table
+-- Note: Use the IDs from the services and masters tables
+INSERT INTO appointments (name, service_id, master_id) VALUES ('Сергей', 1, 1); -- Стрижка мужская by Иван Петров
+INSERT INTO appointments (name, service_id, master_id) VALUES ('Анна', 3, 2);   -- Бритье by Алексей Смирнов
+INSERT INTO appointments (name, service_id, master_id) VALUES ('Михаил', 2, 3); -- Стрижка детская by Мария Иванова
+INSERT INTO appointments (name, service_id, master_id) VALUES ('Елена', 4, 4);  -- Укладка by Дмитрий Козлов</sql><current_tab id="0"/></tab_sql></sqlb_project>
